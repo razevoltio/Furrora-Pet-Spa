@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate - Digital Growth & Creative Studio</title>
+    <style>
+        :root {
+            --primary: #006699;
+            --secondary: #0099cc;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --white: #ffffff;
+            --gray: #666666;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Page Layout Control */
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section (Home) */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        /* Section Containers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .text-link {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Portfolio Specifics */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .portfolio-img-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        @media(max-width: 768px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .success-msg {
+            display: none;
+            background: #e1ffd6;
+            color: #2b6600;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="switchPage('home')">ELEVATE</div>
+            <ul class="nav-links">
+                <li><a onclick="switchPage('home')" id="nav-home" class="active">Home</a></li>
+                <li><a onclick="switchPage('services')" id="nav-services">Services</a></li>
+                <li><a onclick="switchPage('portfolio')" id="nav-portfolio">Portfolio</a></li>
+                <li><a onclick="switchPage('contact')" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- PAGE 1: HOME -->
+    <div id="page-home" class="page active">
+        <section class="hero">
+            <h1>Elevate Your Digital Presence</h1>
+            <p>Modern design solutions for growing businesses scaling up operations.</p>
+            <button class="btn" onclick="switchPage('contact')">Get Started</button>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Core Offerings</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Web Design</h3>
+                    <p>Crafting high-performance, responsive layouts built to convert user interactions cleanly.</p>
+                    <a class="text-link" onclick="switchPage('services')">Learn More &rarr;</a>
+                </div>
+                <div class="card">
+                    <h3>Branding</h3>
+                    <p>Defining distinct visual identities that stand out in crowded digital market spaces.</p>
+                    <a class="text-link" onclick="switchPage('services')">Learn More &rarr;</a>
+                </div>
+                <div class="card">
+                    <h3>Marketing</h3>
+                    <p>Data-driven audience strategies structured to amplify brand visibility effectively.</p>
+                    <a class="text-link" onclick="switchPage('services')">Learn More &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 2: SERVICES -->
+    <div id="page-services" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Our Services</h1>
+            <p>End-to-end capabilities designed to scale modern businesses.</p>
+        </div>
+        <section class="container">
+            <div class="grid-3">
+                <div class="card">
+                    <h3>01. Web Design & Development</h3>
+                    <p>Full-stack development focused on speed, intuitive UX architectures, and pixel-perfect mobile-first adaptability.</p>
+                    <button class="btn" style="background: var(--primary); color: var(--white);" onclick="switchPage('contact')">Inquire</button>
+                </div>
+                <div class="card">
+                    <h3>02. Digital Marketing Campaigns</h3>
+                    <p>Targeted multi-channel ad frameworks and email outreach protocols calibrated for maximum conversion rate optimization.</p>
+                    <button class="btn" style="background: var(--primary); color: var(--white);" onclick="switchPage('contact')">Inquire</button>
+                </div>
+                <div class="card">
+                    <h3>03. Brand Strategy & Positioning</h3>
+                    <p>Comprehensive market research, competitor benchmarking, and customized visual guideline development.</p>
+                    <button class="btn" style="background: var(--primary); color: var(--white);" onclick="switchPage('contact')">Inquire</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 3: PORTFOLIO -->
+    <div id="page-portfolio" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Our Work</h1>
+            <p>Explore our recent case studies and client execution success stories.</p>
+        </div>
+        <section class="container">
+            <div class="portfolio-filters">
+                <button class="filter-btn active" onclick="filterPortfolio('all', this)">All</button>
+                <button class="filter-btn" onclick="filterPortfolio('design', this)">Design</button>
+                <button class="filter-btn" onclick="filterPortfolio('marketing', this)">Marketing</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-img-placeholder">Project Alpha Mockup</div>
+                    <div class="portfolio-content">
+                        <h3>Project Alpha</h3>
+                        <p>Complete e-commerce platform restructuring and UI modernization.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="marketing">
+                    <div class="portfolio-img-placeholder">Eco Solutions Campaign</div>
+                    <div class="portfolio-content">
+                        <h3>Eco Solutions</h3>
+                        <p>Targeted lead-generation campaign scaling organic customer acquisition by 140%.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-img-placeholder">Tech Startup Rebrand</div>
+                    <div class="portfolio-content">
+                        <h3>Tech Startup</h3>
+                        <p>Minimalist identity overhaul and mobile app user experience optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE 4: CONTACT -->
+    <div id="page-contact" class="page">
+        <div class="hero" style="padding: 4rem 2rem;">
+            <h1>Get In Touch</h1>
+            <p>Let's discuss how we can collaborate on your next growth milestone.</p>
+        </div>
+        <section class="container">
+            <div class="contact-wrapper">
+                <div>
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Send a Message</h2>
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="message" required placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="background: var(--primary); color: var(--white); width: 100%;">Send Message</button>
+                        <div id="successMsg" class="success-msg">Thank you! Your message has been sent successfully.</div>
+                    </form>
+                </div>
+                <div class="contact-info" style="display: flex; flex-direction: column; justify-content: center;">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Direct Contacts</h2>
+                    <p><strong>Email:</strong> hello@example.com</p>
+                    <p><strong>Phone:</strong> +1 (555) 456-7890</p>
+                    <p><strong>Address:</strong> 450 Monomer Street, Tech District</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Global Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>ELEVATE</h4>
+                <p style="color: #aaa; font-size: 0.9rem;">Empowering business transformation with modular design and data strategy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Navigation</h4>
+                <ul>
+                    <li><a onclick="switchPage('home')">Home</a></li>
+                    <li><a onclick="switchPage('services')">Services</a></li>
+                    <li><a onclick="switchPage('portfolio')">Portfolio</a></li>
+                    <li><a onclick="switchPage('contact')">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a onclick="switchPage('services')">Web Design</a></li>
+                    <li><a onclick="switchPage('services')">Branding</a></li>
+                    <li><a onclick="switchPage('services')">Marketing</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Elevate Digital Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Script -->
+    <script>
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+
+            // Show target page
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Update nav active states
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Scroll back to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterPortfolio(category, btnElement) {
+            // Update active filter button
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Filter portfolio items
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successDiv = document.getElementById('successMsg');
+            successDiv.style.display = 'block';
+            document.getElementById('contactForm').reset();
+            
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
