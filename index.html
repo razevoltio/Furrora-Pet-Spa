@@ -1,572 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furrora Pet Spa - Luxury Grooming & Care</title>
-    <style>
-        :root {
-            --primary: #2b7a78;
-            --secondary: #3aafa9;
-            --accent: #feffff;
-            --dark: #293241;
-            --light: #f4f9f9;
-            --gray: #666666;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: 1px;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--gray);
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-        }
-
-        /* Page Layout Control */
-        .page {
-            display: none;
-            min-height: calc(100vh - 80px);
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #ffffff;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .btn {
-            background: #ffffff;
-            color: var(--primary);
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background: var(--light);
-            transform: translateY(-2px);
-        }
-
-        /* Containers */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
-            color: var(--primary);
-        }
-
-        /* Grid Layouts */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-        }
-
-        .card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .card p {
-            color: var(--gray);
-            margin-bottom: 1.5rem;
-        }
-
-        .text-link {
-            color: var(--secondary);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .text-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Portfolio / Gallery */
-        .portfolio-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .filter-btn {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            background: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-
-        .portfolio-img-placeholder {
-            height: 200px;
-            background: linear-gradient(45deg, #d8e2dc, #e8f5e9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        .portfolio-content {
-            padding: 1.5rem;
-        }
-
-        /* Contact Section */
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            background: #ffffff;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-
-        @media(max-width: 768px) {
-            .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .contact-info p {
-            margin-bottom: 1rem;
-            color: var(--gray);
-        }
-
-        .success-msg {
-            display: none;
-            background: #e1ffd6;
-            color: #2b6600;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-top: 1rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: #ffffff;
-            padding: 3rem 2rem 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-col h4 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-col ul li a {
-            color: #ccc;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .footer-col ul li a:hover {
-            color: #ffffff;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.5rem;
-            font-size: 0.85rem;
-            color: #888;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furrora Pet Spa - Luxury Grooming & Care</title>
+<meta name="description" content="Gentle, spa-style grooming for dogs and cats. Organic products, patient handling, easy WhatsApp booking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F9F8F6;--blush:#F2E0D9;--rose:#D2ABA4;--rosed:#A86F69;--taupe:#7D645B;--sage:#8F8B78;--ink:#4A3F3A;--line:#E6D3CC}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--taupe);line-height:1.15;font-weight:600}
+h1{font-size:clamp(2.4rem,7vw,4rem)}h2{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:.5rem}h3{font-size:1.35rem;margin-bottom:.35rem}
+a{color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:64px 0}
+.lead{max-width:56ch;color:var(--taupe);margin-bottom:2rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:40px;font-weight:700;text-decoration:none;border:2px solid var(--rosed);background:var(--rosed);color:#fff;cursor:pointer;font:inherit;font-weight:700;transition:background .2s}
+.btn:hover{background:var(--taupe);border-color:var(--taupe)}
+.btn.ghost{background:transparent;color:var(--rosed)}.btn.ghost:hover{background:var(--blush);color:var(--taupe)}
+:focus-visible{outline:3px solid var(--taupe);outline-offset:2px}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(249,248,246,.96);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--taupe);text-decoration:none}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav a{text-decoration:none;font-weight:600;font-size:.95rem}nav a:hover{color:var(--rosed)}
+.menu-btn{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px}
+.menu-btn span{width:24px;height:2px;background:var(--taupe);transition:.25s}
+.menu-btn[aria-expanded=true] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn[aria-expanded=true] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded=true] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media(max-width:760px){
+ .menu-btn{display:flex}
+ nav{position:absolute;top:64px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .3s}
+ nav.open{max-height:360px}
+ nav ul{flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 20px}
+ nav li a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
+ nav li:last-child a{border:0;margin-top:14px;text-align:center}
+}
+/* hero */
+.hero{padding:48px 0 56px;background:linear-gradient(180deg,var(--blush),var(--bg))}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+.hero p{margin:1rem 0 1.6rem;max-width:46ch;font-size:1.1rem;color:var(--taupe)}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.proof{margin-top:1.4rem;font-size:.92rem;color:var(--sage);font-weight:600}
+.art{position:relative;aspect-ratio:1/1;border-radius:50% 50% 46% 46%/42% 42% 58% 58%;background:#fff;overflow:hidden;border:6px solid #fff;box-shadow:0 14px 40px rgba(168,111,105,.18)}
+.art svg,.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr}.art{max-width:340px;margin:0 auto;order:-1}}
+/* trust strip */
+.strip{background:var(--rosed);color:#fff;padding:18px 0}
+.strip ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;font-weight:700;font-size:.95rem}
+@media(max-width:760px){.strip ul{grid-template-columns:1fr 1fr}}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
+.card p{font-size:.97rem}
+.card .ico{width:46px;height:46px;border-radius:50%;background:var(--blush);display:grid;place-items:center;margin-bottom:14px;font-size:1.3rem}
+.tint{background:var(--blush)}
+.steps{counter-reset:s;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.steps li{counter-increment:s;background:#fff;border-radius:18px;padding:26px;border:1px solid var(--line)}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--rosed);color:#fff;font-weight:700;margin-bottom:12px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.menu .card{display:flex;flex-direction:column;gap:12px;justify-content:space-between}
+.menu .btn{align-self:flex-start;padding:10px 22px}
+/* gallery */
+.filters{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.filters button{padding:9px 20px;border-radius:30px;border:1.5px solid var(--rose);background:#fff;color:var(--taupe);font:inherit;font-weight:700;cursor:pointer}
+.filters button.on{background:var(--rosed);border-color:var(--rosed);color:#fff}
+.pet{padding:0;overflow:hidden}.pet svg{width:100%;height:190px;display:block}.pet div{padding:18px 22px 22px}
+.pet.hide{display:none}
+/* testimonials */
+.quote{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--taupe);line-height:1.4;margin-bottom:12px}
+.who{font-size:.9rem;color:var(--sage);font-weight:700}
+.stars{color:#C9965F;letter-spacing:2px;margin-bottom:6px}
+/* faq */
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:12px}
+summary{font-weight:700;cursor:pointer;color:var(--taupe)}
+details p{margin-top:10px;font-size:.97rem}
+/* contact */
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:28px}
+@media(max-width:860px){.contact{grid-template-columns:1fr}}
+form label{display:block;font-weight:700;font-size:.9rem;margin:14px 0 5px;color:var(--taupe)}
+form input,form select,form textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:var(--bg);color:var(--ink)}
+form button{margin-top:20px;width:100%}
+.note{font-size:.88rem;color:var(--sage);margin-top:10px}
+.info p{margin-bottom:12px}
+/* final cta + footer */
+.final{background:var(--rosed);color:#fff;text-align:center;padding:56px 0}
+.final h2{color:#fff}.final p{margin:0 auto 1.4rem;max-width:48ch}
+.final .btn{background:#fff;color:var(--rosed);border-color:#fff}.final .btn:hover{background:var(--blush)}
+footer{background:var(--ink);color:#e9ddd8;padding:36px 0 90px;font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{text-decoration:none}footer a:hover{text-decoration:underline}
+/* floating */
+.wa{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:40px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.wa svg{width:24px;height:24px;fill:#fff}
+@media(max-width:480px){.wa span{display:none}.wa{padding:15px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="dog" viewBox="0 0 200 190"><ellipse cx="55" cy="85" rx="26" ry="48" fill="#C9A27A" transform="rotate(12 55 85)"/><ellipse cx="145" cy="85" rx="26" ry="48" fill="#C9A27A" transform="rotate(-12 145 85)"/><circle cx="100" cy="90" r="56" fill="#E8C9A0"/><ellipse cx="100" cy="112" rx="26" ry="20" fill="#F6E6CF"/><ellipse cx="100" cy="102" rx="11" ry="8" fill="#4A3F3A"/><path d="M84 124q16 14 32 0" stroke="#4A3F3A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M72 78q8-7 16 0M112 78q8-7 16 0" stroke="#4A3F3A" stroke-width="3.5" fill="none" stroke-linecap="round"/></symbol>
+ <symbol id="cat" viewBox="0 0 200 190"><path d="M44 70L52 14L92 44ZM156 70L148 14L108 44Z" fill="#EBDDD2"/><path d="M54 60L58 32L78 46ZM146 60L142 32L122 46Z" fill="#E7BDB5"/><ellipse cx="100" cy="102" rx="64" ry="54" fill="#F3EAE2"/><path d="M72 92q8-8 16 0M112 92q8-8 16 0" stroke="#4A3F3A" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M94 108h12l-6 7z" fill="#D08A86"/><path d="M100 115q-10 12-22 4M100 115q10 12 22 4" stroke="#4A3F3A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M40 106l28 4M40 120l28-4M160 106l-28 4M160 120l-28-4" stroke="#C9B8AC" stroke-width="2"/></symbol>
+ <symbol id="poodle" viewBox="0 0 200 190"><circle cx="52" cy="92" r="30" fill="#fff" stroke="#E6D3CC" stroke-width="2"/><circle cx="148" cy="92" r="30" fill="#fff" stroke="#E6D3CC" stroke-width="2"/><circle cx="100" cy="40" r="32" fill="#fff" stroke="#E6D3CC" stroke-width="2"/><circle cx="100" cy="100" r="46" fill="#fff" stroke="#E6D3CC" stroke-width="2"/><ellipse cx="100" cy="116" rx="18" ry="14" fill="#F6EDE6"/><ellipse cx="100" cy="108" rx="8" ry="6" fill="#4A3F3A"/><circle cx="82" cy="92" r="4" fill="#4A3F3A"/><circle cx="118" cy="92" r="4" fill="#4A3F3A"/><path d="M90 124q10 8 20 0" stroke="#4A3F3A" stroke-width="2.5" fill="none" stroke-linecap="round"/></symbol>
+</svg>
 
-    <!-- Global Navigation -->
-    <header>
-        <div class="nav-container">
-            <div class="logo" onclick="switchPage('home')">🐾 FURRORA</div>
-            <ul class="nav-links">
-                <li><a onclick="switchPage('home')" id="nav-home" class="active">Home</a></li>
-                <li><a onclick="switchPage('services')" id="nav-services">Services</a></li>
-                <li><a onclick="switchPage('portfolio')" id="nav-portfolio">Gallery</a></li>
-                <li><a onclick="switchPage('contact')" id="nav-contact">Book Visit</a></li>
-            </ul>
-        </div>
-    </header>
+<header>
+ <div class="wrap bar">
+  <a class="brand" href="#home">🐾 Furrora</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  <nav id="nav" aria-label="Main">
+   <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a class="btn" href="#book">Book a visit</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
 
-    <!-- PAGE 1: HOME -->
-    <div id="page-home" class="page active">
-        <section class="hero">
-            <h1>Pampering Your Pets to Perfection</h1>
-            <p>Luxury grooming, therapeutic spa treatments, and loving care for your furry family members.</p>
-            <button class="btn" onclick="switchPage('contact')">Book an Appointment</button>
-        </section>
+<main>
+<section class="hero" id="home">
+ <div class="wrap">
+  <div>
+   <h1>Pampering your pets to perfection</h1>
+   <p>Spa-style grooming for dogs and cats. Organic products, patient hands, and a calm space where your pet leaves clean, relaxed, and loved.</p>
+   <div class="cta">
+    <a class="btn" href="#book">Book an appointment</a>
+    <a class="btn ghost" href="#pricing">See spa menu</a>
+   </div>
+   <p class="proof">Gentle handling · Hypoallergenic products · No cages, no rush</p>
+  </div>
+  <div class="art">
+   <!-- Fallback illustration. To use an AI image, add images/hero.jpg (square, ~1000px) and it will cover this. -->
+   <svg viewBox="0 0 400 400" aria-hidden="true"><rect width="400" height="400" fill="#F9F0EC"/><path d="M60 340C70 120 330 120 340 340" stroke="#D2ABA4" stroke-width="3" fill="none"/><g fill="#D2ABA4"><path d="M300 90l7 20 20 7-20 7-7 20-7-20-20-7 20-7z"/><path d="M335 150l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/></g><use href="#dog" x="76" y="110" width="150" height="142"/><use href="#cat" x="196" y="160" width="120" height="114"/><path d="M96 130q40-50 80-6l-8 28q-30-26-64-4z" fill="#F2C9C2"/><path d="M226 178q26-30 56-2l-6 20q-22-16-44-2z" fill="#F2C9C2"/><path d="M70 240h260q-6 80-80 100h-100q-74-20-80-100z" fill="#D2ABA4"/><rect x="62" y="228" width="276" height="26" rx="13" fill="#fff" stroke="#E6D3CC" stroke-width="3"/><g fill="#fff" stroke="#E6D3CC" stroke-width="2"><circle cx="100" cy="225" r="12"/><circle cx="150" cy="218" r="14"/><circle cx="212" cy="222" r="11"/><circle cx="262" cy="217" r="14"/><circle cx="305" cy="226" r="10"/><circle cx="120" cy="196" r="7"/><circle cx="290" cy="196" r="8"/></g><path d="M110 340l-14 18M290 340l14 18" stroke="#B5807A" stroke-width="10" stroke-linecap="round"/></svg>
+   <img src="images/hero.jpg" alt="A happy dog and cat enjoying a spa bath at Furrora" onerror="this.remove()">
+  </div>
+ </div>
+</section>
 
-        <section class="container">
-            <h2 class="section-title">Our Signature Services</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>Full Spa Grooming</h3>
-                    <p>Includes a soothing bath with organic shampoo, blow dry, haircut, nail trimming, and ear cleaning.</p>
-                    <a class="text-link" onclick="switchPage('services')">View Details &rarr;</a>
-                </div>
-                <div class="card">
-                    <h3>De-Shedding Treatments</h3>
-                    <p>Specialized coat treatments designed to significantly reduce loose fur and keep coats healthy and shiny.</p>
-                    <a class="text-link" onclick="switchPage('services')">View Details &rarr;</a>
-                </div>
-                <div class="card">
-                    <h3>Puppy’s First Spa Day</h3>
-                    <p>A gentle, stress-free introduction to grooming tailored specifically for young and sensitive puppies.</p>
-                    <a class="text-link" onclick="switchPage('services')">View Details &rarr;</a>
-                </div>
-            </div>
-        </section>
-    </div>
+<div class="strip"><div class="wrap"><ul>
+ <li>Organic, pet-safe products</li><li>One pet at a time</li><li>Dogs &amp; cats, all breeds</li><li>Book in 1 minute on WhatsApp</li>
+</ul></div></div>
 
-    <!-- PAGE 2: SERVICES -->
-    <div id="page-services" class="page">
-        <div class="hero" style="padding: 4rem 2rem;">
-            <h1>Spa Menu & Pricing</h1>
-            <p>Professional care packages customized for dogs and cats of all breeds and sizes.</p>
-        </div>
-        <section class="container">
-            <div class="grid-3">
-                <div class="card">
-                    <h3>01. The Royal Furrora Bath</h3>
-                    <p>Hypoallergenic organic shampoo wash, blow-dry brush out, full nail clipping, sanitary trim, and blueberry facial.</p>
-                    <button class="btn" style="background: var(--primary); color: #ffffff;" onclick="switchPage('contact')">Book Now</button>
-                </div>
-                <div class="card">
-                    <h3>02. Full Breed Styling</h3>
-                    <p>Complete custom haircut to breed standard or your preferred personal style, plus our full signature bath package.</p>
-                    <button class="btn" style="background: var(--primary); color: #ffffff;" onclick="switchPage('contact')">Book Now</button>
-                </div>
-                <div class="card">
-                    <h3>03. A La Carte Care</h3>
-                    <p>Quick standalone maintenance items including teeth brushing, nail grinding, ear flushing, and soothing paw pad balm.</p>
-                    <button class="btn" style="background: var(--primary); color: #ffffff;" onclick="switchPage('contact')">Book Now</button>
-                </div>
-            </div>
-        </section>
-    </div>
+<section id="services">
+ <div class="wrap">
+  <h2>Our signature services</h2>
+  <p class="lead">Every visit is paced to your pet's comfort, never rushed through.</p>
+  <div class="grid">
+   <div class="card"><div class="ico">🛁</div><h3>Full spa grooming</h3><p>Soothing bath with organic shampoo, blow dry, haircut, nail trimming, and ear cleaning.</p></div>
+   <div class="card"><div class="ico">✨</div><h3>De-shedding treatment</h3><p>Specialized coat care that cuts loose fur and keeps coats healthy and shiny.</p></div>
+   <div class="card"><div class="ico">🐶</div><h3>Puppy's first spa day</h3><p>A gentle, stress-free introduction to grooming for young and sensitive puppies.</p></div>
+  </div>
+ </div>
+</section>
 
-    <!-- PAGE 3: PORTFOLIO / GALLERY -->
-    <div id="page-portfolio" class="page">
-        <div class="hero" style="padding: 4rem 2rem;">
-            <h1>Happy Clients Gallery</h1>
-            <p>Take a look at some of our freshly styled and pampered furry visitors.</p>
-        </div>
-        <section class="container">
-            <div class="portfolio-filters">
-                <button class="filter-btn active" onclick="filterPortfolio('all', this)">All Pets</button>
-                <button class="filter-btn" onclick="filterPortfolio('dogs', this)">Dogs</button>
-                <button class="filter-btn" onclick="filterPortfolio('cats', this)">Cats</button>
-            </div>
+<section class="tint">
+ <div class="wrap">
+  <h2>Why pet parents choose Furrora</h2>
+  <p class="lead">Grooming works best when your pet feels safe. That is how we run every appointment.</p>
+  <div class="grid">
+   <div class="card"><h3>Calm, one-on-one care</h3><p>One pet at a time with breaks, treats, and a quiet room. No crowded cages.</p></div>
+   <div class="card"><h3>Gentle on skin</h3><p>Hypoallergenic, organic shampoos suited to sensitive skin and delicate coats.</p></div>
+   <div class="card"><h3>Updates you can see</h3><p>We send a photo when your pet is ready, so you know they are happy and safe.</p></div>
+  </div>
+ </div>
+</section>
 
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="dogs">
-                    <div class="portfolio-img-placeholder">Golden Retriever Makeover</div>
-                    <div class="portfolio-content">
-                        <h3>Max (Golden Retriever)</h3>
-                        <p>Full deshedding treatment, bath, and feathering trim.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="cats">
-                    <div class="portfolio-img-placeholder">Persian Cat Grooming</div>
-                    <div class="portfolio-content">
-                        <h3>Luna (Persian Cat)</h3>
-                        <p>Lion cut styling, gentle detangling, and claw trim.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="dogs">
-                    <div class="portfolio-img-placeholder">Poodle Styling</div>
-                    <div class="portfolio-content">
-                        <h3>Coco (Toy Poodle)</h3>
-                        <p>Custom Asian fusion haircut and blueberry facial spa.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+<section>
+ <div class="wrap">
+  <h2>How it works</h2>
+  <p class="lead">Booking takes a minute. The rest is on us.</p>
+  <ol class="steps">
+   <li><h3>Tell us about your pet</h3><p>Send the booking form or a WhatsApp message with breed, size, and what you need.</p></li>
+   <li><h3>We confirm your slot</h3><p>We reply quickly with a time and the exact price for your pet.</p></li>
+   <li><h3>Drop off, relax, pick up</h3><p>Your pet gets pampered and comes home fresh, fluffy, and calm.</p></li>
+  </ol>
+ </div>
+</section>
 
-    <!-- PAGE 4: CONTACT / BOOKING -->
-    <div id="page-contact" class="page">
-        <div class="hero" style="padding: 4rem 2rem;">
-            <h1>Book Your Appointment</h1>
-            <p>Get in touch with our team to schedule a spa day for your pet.</p>
-        </div>
-        <section class="container">
-            <div class="contact-wrapper">
-                <div>
-                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Reservation Request</h2>
-                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" id="name" required placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label>Pet's Name & Breed</label>
-                            <input type="text" id="petInfo" required placeholder="e.g., Milo - Beagle">
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" id="email" required placeholder="name@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label>Requested Service / Notes</label>
-                            <textarea id="message" required placeholder="Tell us about your pet's needs and preferred date..."></textarea>
-                        </div>
-                        <button type="submit" class="btn" style="background: var(--primary); color: #ffffff; width: 100%;">Submit Booking Request</button>
-                        <div id="successMsg" class="success-msg">Request received! We will call you shortly to confirm your slot.</div>
-                    </form>
-                </div>
-                <div class="contact-info" style="display: flex; flex-direction: column; justify-content: center;">
-                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Visit Furrora Spa</h2>
-                    <p><strong>Email:</strong> woof@furrorapetspa.com</p>
-                    <p><strong>Phone:</strong> +1 (555) 387-7672</p>
-                    <p><strong>Address:</strong> 124 Paws Avenue, Barkingham District</p>
-                    <p><strong>Hours:</strong> Tue - Sun: 9:00 AM - 6:00 PM</p>
-                </div>
-            </div>
-        </section>
-    </div>
+<section class="tint menu" id="pricing">
+ <div class="wrap">
+  <h2>Spa menu &amp; pricing</h2>
+  <p class="lead">Care packages for dogs and cats of all breeds and sizes. Message us for an exact quote for your pet.</p>
+  <div class="grid">
+   <div class="card"><div><h3>The Royal Furrora bath</h3><p>Hypoallergenic organic shampoo wash, blow-dry brush out, full nail clipping, sanitary trim, and blueberry facial.</p></div><a class="btn" href="#book">Book this</a></div>
+   <div class="card"><div><h3>Full breed styling</h3><p>Custom haircut to breed standard or your preferred style, plus our full signature bath.</p></div><a class="btn" href="#book">Book this</a></div>
+   <div class="card"><div><h3>A la carte care</h3><p>Quick add-ons: teeth brushing, nail grinding, ear flushing, and soothing paw pad balm.</p></div><a class="btn" href="#book">Book this</a></div>
+  </div>
+ </div>
+</section>
 
-    <!-- Global Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h4>🐾 FURRORA PET SPA</h4>
-                <p style="color: #aaa; font-size: 0.9rem;">Providing premium loving care and specialized grooming for your pets.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Navigation</h4>
-                <ul>
-                    <li><a onclick="switchPage('home')">Home</a></li>
-                    <li><a onclick="switchPage('services')">Services</a></li>
-                    <li><a onclick="switchPage('portfolio')">Gallery</a></li>
-                    <li><a onclick="switchPage('contact')">Book Visit</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Treatments</h4>
-                <ul>
-                    <li><a onclick="switchPage('services')">Full Spa Bath</a></li>
-                    <li><a onclick="switchPage('services')">Breed Styling</a></li>
-                    <li><a onclick="switchPage('services')">De-shedding</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 Furrora Pet Spa. All rights reserved.
-        </div>
-    </footer>
+<section id="gallery">
+ <div class="wrap">
+  <h2>Happy clients gallery</h2>
+  <p class="lead">A few freshly pampered visitors.</p>
+  <div class="filters" role="group" aria-label="Filter gallery">
+   <button class="on" data-f="all">All pets</button><button data-f="dog">Dogs</button><button data-f="cat">Cats</button>
+  </div>
+  <div class="grid">
+   <div class="card pet" data-t="dog"><svg viewBox="0 0 200 190" style="background:#F9F0EC"><use href="#dog" width="200" height="190"/></svg><div><h3>Max, Golden Retriever</h3><p>Full deshedding treatment, bath, and feathering trim.</p></div></div>
+   <div class="card pet" data-t="cat"><svg viewBox="0 0 200 190" style="background:#EEF0EA"><use href="#cat" width="200" height="190"/></svg><div><h3>Luna, Persian Cat</h3><p>Lion cut styling, gentle detangling, and claw trim.</p></div></div>
+   <div class="card pet" data-t="dog"><svg viewBox="0 0 200 190" style="background:#F2E0D9"><use href="#poodle" width="200" height="190"/></svg><div><h3>Coco, Toy Poodle</h3><p>Custom haircut and blueberry facial spa.</p></div></div>
+  </div>
+ </div>
+</section>
 
-    <!-- Interactive Logic Script -->
-    <script>
-        function switchPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active'));
+<section class="tint">
+ <div class="wrap">
+  <h2>What pet parents say</h2>
+  <p class="lead">Sample reviews. Replace with real client reviews before launch.</p>
+  <div class="grid">
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">"My anxious rescue came home relaxed and smelling amazing. He actually wagged at the door."</p><p class="who">Priya, Max's mom</p></div>
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">"Finally a groomer who is patient with cats. Luna's coat has never looked this soft."</p><p class="who">Rahul, Luna's dad</p></div>
+   <div class="card"><div class="stars">★★★★★</div><p class="quote">"Booking on WhatsApp took two minutes, and I got a photo the moment she was ready."</p><p class="who">Ananya, Coco's mom</p></div>
+  </div>
+ </div>
+</section>
 
-            const targetPage = document.getElementById(`page-${pageId}`);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
+<section id="faq">
+ <div class="wrap">
+  <h2>Questions, answered</h2>
+  <p class="lead">Can't find yours? Message us on WhatsApp.</p>
+  <details><summary>How long does a spa visit take?</summary><p>Most visits take 2 to 3 hours depending on breed, coat, and the package you choose. We will confirm timing when you book.</p></details>
+  <details><summary>Is my pet safe with sensitive skin or allergies?</summary><p>Yes. We use hypoallergenic, organic shampoos. Tell us about any allergies or skin conditions when you book.</p></details>
+  <details><summary>Do you groom cats too?</summary><p>Yes. Cats get a quiet, patient session with gentle handling and no rushing.</p></details>
+  <details><summary>My puppy has never been groomed. Is that okay?</summary><p>Absolutely. Our Puppy's First Spa Day is designed for exactly this.</p></details>
+  <details><summary>How do I book or reschedule?</summary><p>Use the form below or tap the WhatsApp button. We reply with your slot and exact price.</p></details>
+ </div>
+</section>
 
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(l => l.classList.remove('active'));
-            
-            const activeNav = document.getElementById(`nav-${pageId}`);
-            if (activeNav) {
-                activeNav.classList.add('active');
-            }
+<section class="tint" id="book">
+ <div class="wrap">
+  <h2>Book your appointment</h2>
+  <p class="lead">Fill this in and we will continue the chat on WhatsApp to confirm your slot.</p>
+  <div class="contact">
+   <div class="card">
+    <h3>Reservation request</h3>
+    <form id="bookForm">
+     <label for="n">Your name</label><input id="n" required autocomplete="name">
+     <label for="p">Pet's name &amp; breed</label><input id="p" required placeholder="e.g. Max, Golden Retriever">
+     <label for="s">Service</label>
+     <select id="s"><option>The Royal Furrora bath</option><option>Full breed styling</option><option>De-shedding treatment</option><option>Puppy's first spa day</option><option>A la carte care</option></select>
+     <label for="m">Notes (optional)</label><textarea id="m" rows="3" placeholder="Preferred day, allergies, anything we should know"></textarea>
+     <button class="btn" type="submit">Send on WhatsApp</button>
+     <p class="note">Opens WhatsApp with your details filled in.</p>
+    </form>
+   </div>
+   <div class="card info">
+    <h3>Visit Furrora Spa</h3>
+    <p><strong>Phone:</strong> +1 (555) 387-7672</p>
+    <p><strong>Email:</strong> woof@furrorapetspa.com</p>
+    <p><strong>Address:</strong> 124 Paws Avenue, Barkingham District</p>
+    <p><strong>Hours:</strong> Tue to Sun, 9:00 AM to 6:00 PM</p>
+    <a class="btn ghost" href="tel:+15553877672">Call us</a>
+   </div>
+  </div>
+ </div>
+</section>
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+<section class="final">
+ <div class="wrap">
+  <h2>Ready for a spa day?</h2>
+  <p>Give your pet the calm, careful pampering they deserve. Slots fill up fast, so message us today.</p>
+  <a class="btn" href="#book">Book an appointment</a>
+ </div>
+</section>
+</main>
 
-        function filterPortfolio(category, btnElement) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
+<footer>
+ <div class="wrap">
+  <div><strong>🐾 Furrora Pet Spa</strong><br>Cleanse. Relax. Love.</div>
+  <div><a href="#services">Services</a><br><a href="#pricing">Pricing</a><br><a href="#gallery">Gallery</a></div>
+  <div>© 2026 Furrora Pet Spa. All rights reserved.</div>
+ </div>
+</footer>
 
-            const items = document.querySelectorAll('.portfolio-item');
-            items.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+<a class="wa" id="waBtn" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.2 2 11.4c0 2.200 1 4.300 2.700 5.800L4 22l5-2.200c.9.200 1.900.4 3 .4 5.500 0 10-4.200 10-9.400S17.500 2 12 2z"/></svg><span>Chat on WhatsApp</span></a>
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const successDiv = document.getElementById('successMsg');
-            successDiv.style.display = 'block';
-            document.getElementById('contactForm').reset();
-            
-            setTimeout(() => {
-                successDiv.style.display = 'none';
-            }, 5000);
-        }
-    </script>
+<script>
+// Replace with the spa's real WhatsApp number: country code + number, digits only (e.g. 919876543210)
+var WA_NUMBER="919999999999";
+function wa(t){return "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(t)}
+document.getElementById("waBtn").href=wa("Hi Furrora! I'd like to book a spa day for my pet.");
+
+var btn=document.getElementById("menuBtn"),nav=document.getElementById("nav");
+function setMenu(o){nav.classList.toggle("open",o);btn.setAttribute("aria-expanded",o);btn.setAttribute("aria-label",o?"Close menu":"Open menu")}
+btn.addEventListener("click",function(){setMenu(!nav.classList.contains("open"))});
+nav.addEventListener("click",function(e){if(e.target.tagName==="A")setMenu(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenu(false)});
+
+document.querySelectorAll(".filters button").forEach(function(b){b.addEventListener("click",function(){
+ document.querySelectorAll(".filters button").forEach(function(x){x.classList.remove("on")});b.classList.add("on");
+ document.querySelectorAll(".pet").forEach(function(c){c.classList.toggle("hide",b.dataset.f!=="all"&&c.dataset.t!==b.dataset.f)})})});
+
+document.getElementById("bookForm").addEventListener("submit",function(e){e.preventDefault();
+ var v=function(i){return document.getElementById(i).value.trim()};
+ var t="Hi Furrora! I'd like to book.\nName: "+v("n")+"\nPet: "+v("p")+"\nService: "+v("s")+(v("m")?"\nNotes: "+v("m"):"");
+ window.open(wa(t),"_blank")});
+</script>
 </body>
 </html>
